@@ -1,0 +1,430 @@
+.home {
+  min-height: 100vh;
+}
+
+
+/* =========================
+   HERO
+========================= */
+
+.hero {
+  min-height: 520px;
+  padding: 70px 8%;
+
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 50px;
+
+  background: #fff5ef;
+}
+
+.hero-content {
+  max-width: 600px;
+}
+
+.hero-small,
+.section-small {
+  color: #ff6b35;
+  font-size: 13px;
+  font-weight: bold;
+  letter-spacing: 2px;
+  margin-bottom: 10px;
+}
+
+.hero h1 {
+  font-size: 55px;
+  line-height: 1.1;
+  margin-bottom: 20px;
+}
+
+.hero-text {
+  color: #666;
+  font-size: 18px;
+  line-height: 1.6;
+  margin-bottom: 30px;
+  max-width: 520px;
+}
+
+.order-btn {
+  border: none;
+  padding: 15px 30px;
+
+  background: #ff6b35;
+  color: white;
+
+  border-radius: 30px;
+
+  font-size: 16px;
+  font-weight: bold;
+
+  cursor: pointer;
+
+  transition: 0.3s;
+}
+
+.order-btn:hover {
+  background: #e95725;
+  transform: translateY(-2px);
+}
+
+.hero-image {
+  width: 330px;
+  height: 330px;
+
+  border-radius: 50%;
+
+  background: white;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  font-size: 150px;
+
+  box-shadow: 0 15px 40px rgba(0, 0, 0, 0.08);
+}
+
+
+/* =========================
+   CATEGORIES
+========================= */
+
+.categories-section {
+  padding: 70px 8%;
+}
+
+.categories-section h2 {
+  font-size: 32px;
+  margin-bottom: 30px;
+}
+
+.categories {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: 15px;
+}
+
+.category-card {
+  padding: 22px 10px;
+
+  text-align: center;
+
+  border: 1px solid #eee;
+  border-radius: 15px;
+
+  cursor: pointer;
+
+  background: white;
+
+  transition: 0.3s;
+}
+
+.category-card:hover {
+  transform: translateY(-5px);
+
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.08);
+}
+
+.category-icon {
+  font-size: 42px;
+  margin-bottom: 10px;
+}
+
+.category-card h3 {
+  font-size: 14px;
+}
+
+
+/* =========================
+   ACTIVE CATEGORY
+========================= */
+
+.active-category {
+  background: #ff6b35;
+  color: white;
+  border-color: #ff6b35;
+}
+
+.active-category:hover {
+  color: white;
+
+  box-shadow:
+    0 10px 25px rgba(255, 107, 53, 0.25);
+}
+
+
+/* =========================
+   POPULAR FOOD
+========================= */
+
+.popular-section {
+  padding: 20px 8% 80px;
+}
+
+.section-heading {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+
+  margin-bottom: 30px;
+}
+
+.section-heading h2 {
+  font-size: 32px;
+  margin: 0;
+}
+
+.view-menu {
+  border: none;
+  background: transparent;
+
+  color: #ff6b35;
+
+  font-size: 15px;
+  font-weight: bold;
+
+  cursor: pointer;
+
+  transition: 0.3s;
+}
+
+.view-menu:hover {
+  color: #e95725;
+  transform: translateX(3px);
+}
+
+
+/* =========================
+   FOOD GRID
+========================= */
+
+.food-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 25px;
+}
+
+.food-card {
+  overflow: hidden;
+
+  border: 1px solid #eee;
+  border-radius: 18px;
+
+  background: white;
+
+  transition: 0.3s;
+}
+
+.food-card:hover {
+  transform: translateY(-5px);
+
+  box-shadow:
+    0 12px 30px rgba(0, 0, 0, 0.1);
+}
+
+.food-image {
+  height: 190px;
+
+  background: #fff5ef;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  font-size: 90px;
+}
+
+.food-info {
+  padding: 20px;
+}
+
+.rating {
+  font-size: 14px;
+  margin-bottom: 10px;
+}
+
+.food-info h3 {
+  font-size: 19px;
+  margin-bottom: 8px;
+}
+
+.food-info p {
+  color: #777;
+
+  font-size: 14px;
+  line-height: 1.5;
+
+  margin-bottom: 18px;
+}
+
+.food-bottom {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.food-bottom strong {
+  font-size: 20px;
+}
+
+.food-bottom button {
+  border: none;
+
+  padding: 8px 15px;
+
+  border-radius: 20px;
+
+  background: #ff6b35;
+  color: white;
+
+  cursor: pointer;
+
+  font-weight: bold;
+
+  transition: 0.3s;
+}
+
+.food-bottom button:hover {
+  background: #e95725;
+  transform: scale(1.03);
+}
+
+
+/* =========================
+   NO RESULTS
+========================= */
+
+.no-home-results {
+  grid-column: 1 / -1;
+
+  text-align: center;
+
+  padding: 50px;
+
+  border: 1px solid #eee;
+  border-radius: 15px;
+}
+
+.no-home-results div {
+  font-size: 50px;
+  margin-bottom: 15px;
+}
+
+.no-home-results h3 {
+  margin-bottom: 8px;
+}
+
+.no-home-results p {
+  color: #777;
+}
+
+
+/* =========================
+   TABLET
+========================= */
+
+@media (max-width: 1000px) {
+
+  .hero {
+    padding: 60px 6%;
+  }
+
+  .hero h1 {
+    font-size: 45px;
+  }
+
+  .hero-image {
+    width: 280px;
+    height: 280px;
+    font-size: 120px;
+  }
+
+  .categories {
+    grid-template-columns: repeat(4, 1fr);
+  }
+
+  .food-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+
+/* =========================
+   MOBILE
+========================= */
+
+@media (max-width: 650px) {
+
+  .hero {
+    min-height: auto;
+
+    padding: 50px 6%;
+
+    flex-direction: column;
+
+    text-align: center;
+  }
+
+  .hero-content {
+    max-width: 100%;
+  }
+
+  .hero h1 {
+    font-size: 38px;
+  }
+
+  .hero-text {
+    font-size: 16px;
+  }
+
+  .hero-image {
+    width: 220px;
+    height: 220px;
+    font-size: 95px;
+  }
+
+  .categories-section {
+    padding: 50px 6%;
+  }
+
+  .categories-section h2,
+  .section-heading h2 {
+    font-size: 27px;
+  }
+
+  .categories {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 15px;
+  }
+
+  .category-card {
+    padding: 20px 10px;
+  }
+
+  .category-icon {
+    font-size: 38px;
+  }
+
+  .popular-section {
+    padding: 20px 6% 60px;
+  }
+
+  .section-heading {
+    align-items: flex-end;
+    gap: 15px;
+  }
+
+  .view-menu {
+    font-size: 13px;
+  }
+
+  .food-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .food-image {
+    height: 200px;
+  }
+
+}

@@ -1,0 +1,414 @@
+.account-page {
+  min-height: calc(100vh - 80px);
+  padding: 60px 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: linear-gradient(
+    135deg,
+    #fff7f2 0%,
+    #fff 50%,
+    #fff3ec 100%
+  );
+}
+
+/* Main Card */
+.account-card {
+  width: 100%;
+  max-width: 560px;
+  padding: 42px;
+  background: rgba(255, 255, 255, 0.95);
+  border: 1px solid rgba(255, 107, 53, 0.12);
+  border-radius: 28px;
+  box-shadow:
+    0 20px 60px rgba(0, 0, 0, 0.08),
+    0 4px 15px rgba(255, 107, 53, 0.06);
+  text-align: center;
+}
+
+/* Profile Icon */
+.account-icon {
+  width: 92px;
+  height: 92px;
+  margin: 0 auto 18px;
+  border-radius: 50%;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  background: linear-gradient(
+    135deg,
+    #ff6b35,
+    #ff8a5b
+  );
+
+  font-size: 42px;
+
+  box-shadow:
+    0 10px 25px rgba(255, 107, 53, 0.25);
+
+  border: 5px solid white;
+}
+
+/* Heading */
+.account-card h1 {
+  margin: 0;
+  font-size: 32px;
+  font-weight: 800;
+  color: #222;
+  letter-spacing: -0.5px;
+}
+
+.account-card h1::after {
+  content: "";
+  display: block;
+
+  width: 45px;
+  height: 4px;
+
+  margin: 12px auto 30px;
+
+  border-radius: 10px;
+
+  background: #ff6b35;
+}
+
+/* Account Information */
+.account-info {
+  margin-bottom: 24px;
+  padding: 5px 0;
+}
+
+.account-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  gap: 20px;
+
+  padding: 18px 4px;
+
+  border-bottom: 1px solid #eeeeee;
+}
+
+.account-item:last-child {
+  border-bottom: none;
+}
+
+.account-item span {
+  font-size: 14px;
+  font-weight: 600;
+  color: #888;
+  text-align: left;
+}
+
+.account-item strong {
+  max-width: 65%;
+
+  font-size: 15px;
+  font-weight: 700;
+
+  color: #222;
+
+  text-align: right;
+
+  word-break: break-word;
+}
+
+/* Edit Profile Button */
+.edit-profile-btn {
+  width: 100%;
+
+  padding: 14px 18px;
+
+  margin-bottom: 10px;
+
+  border: 1px solid #ff6b35;
+  border-radius: 12px;
+
+  background: #fff5ef;
+  color: #ff6b35;
+
+  font-size: 15px;
+  font-weight: 700;
+
+  cursor: pointer;
+
+  transition:
+    transform 0.2s ease,
+    background 0.2s ease,
+    box-shadow 0.2s ease;
+}
+
+.edit-profile-btn:hover {
+  background: #ff6b35;
+  color: white;
+
+  transform: translateY(-2px);
+
+  box-shadow: 0 8px 20px rgba(255, 107, 53, 0.2);
+}
+
+/* Edit Form */
+.edit-profile-form {
+  text-align: left;
+  margin-bottom: 20px;
+}
+
+.edit-profile-form label {
+  display: block;
+
+  margin: 14px 0 7px;
+
+  font-size: 14px;
+  font-weight: 700;
+
+  color: #444;
+}
+
+.edit-profile-form input {
+  width: 100%;
+
+  box-sizing: border-box;
+
+  padding: 14px 15px;
+
+  border: 1px solid #ddd;
+  border-radius: 12px;
+
+  background: #fafafa;
+
+  color: #222;
+
+  font-size: 15px;
+
+  outline: none;
+
+  transition:
+    border-color 0.2s ease,
+    box-shadow 0.2s ease,
+    background 0.2s ease;
+}
+
+.edit-profile-form input:focus {
+  border-color: #ff6b35;
+
+  background: white;
+
+  box-shadow:
+    0 0 0 4px rgba(255, 107, 53, 0.1);
+}
+
+/* Edit Buttons */
+.edit-buttons {
+  display: flex;
+
+  gap: 10px;
+
+  margin-top: 20px;
+}
+
+.save-profile-btn,
+.cancel-edit-btn {
+  flex: 1;
+
+  padding: 13px;
+
+  border-radius: 11px;
+
+  font-size: 14px;
+  font-weight: 700;
+
+  cursor: pointer;
+
+  transition:
+    transform 0.2s ease,
+    opacity 0.2s ease;
+}
+
+.save-profile-btn {
+  border: none;
+
+  background: #ff6b35;
+  color: white;
+
+  box-shadow:
+    0 7px 18px rgba(255, 107, 53, 0.2);
+}
+
+.cancel-edit-btn {
+  border: 1px solid #ddd;
+
+  background: #f7f7f7;
+  color: #444;
+}
+
+.save-profile-btn:hover,
+.cancel-edit-btn:hover {
+  transform: translateY(-2px);
+  opacity: 0.9;
+}
+
+/* Success / Error Message */
+.profile-message {
+  margin: 12px 0 18px;
+
+  padding: 11px 14px;
+
+  border-radius: 10px;
+
+  background: #f0fff4;
+  color: #218739;
+
+  font-size: 14px;
+  font-weight: 600;
+}
+
+/* View Orders */
+.orders-btn {
+  width: 100%;
+
+  padding: 14px 18px;
+
+  margin-top: 8px;
+
+  border: none;
+  border-radius: 12px;
+
+  background: #ff6b35;
+  color: white;
+
+  font-size: 15px;
+  font-weight: 700;
+
+  cursor: pointer;
+
+  box-shadow:
+    0 8px 20px rgba(255, 107, 53, 0.2);
+
+  transition:
+    transform 0.2s ease,
+    box-shadow 0.2s ease;
+}
+
+.orders-btn:hover {
+  transform: translateY(-2px);
+
+  box-shadow:
+    0 12px 25px rgba(255, 107, 53, 0.28);
+}
+
+/* Logout */
+.logout-account-btn {
+  width: 100%;
+
+  padding: 13px 18px;
+
+  margin-top: 10px;
+
+  border: none;
+  border-radius: 12px;
+
+  background: #252525;
+  color: white;
+
+  font-size: 15px;
+  font-weight: 700;
+
+  cursor: pointer;
+
+  transition:
+    transform 0.2s ease,
+    background 0.2s ease;
+}
+
+.logout-account-btn:hover {
+  background: #111;
+
+  transform: translateY(-2px);
+}
+
+/* Back Button */
+.back-btn {
+  width: 100%;
+
+  padding: 13px 18px;
+
+  margin-top: 10px;
+
+  border: 1px solid #e5e5e5;
+  border-radius: 12px;
+
+  background: #f8f8f8;
+  color: #555;
+
+  font-size: 14px;
+  font-weight: 600;
+
+  cursor: pointer;
+
+  transition:
+    background 0.2s ease,
+    transform 0.2s ease;
+}
+
+.back-btn:hover {
+  background: #eeeeee;
+
+  transform: translateY(-1px);
+}
+
+/* Mobile */
+@media (max-width: 600px) {
+  .account-page {
+    min-height: calc(100vh - 70px);
+    padding: 35px 15px;
+  }
+
+  .account-card {
+    padding: 30px 22px;
+    border-radius: 22px;
+  }
+
+  .account-icon {
+    width: 78px;
+    height: 78px;
+    font-size: 36px;
+  }
+
+  .account-card h1 {
+    font-size: 27px;
+  }
+
+  .account-item {
+    align-items: flex-start;
+    flex-direction: column;
+    gap: 6px;
+  }
+
+  .account-item strong {
+    max-width: 100%;
+    text-align: left;
+  }
+
+  .edit-buttons {
+    flex-direction: column;
+  }
+}
+
+@media (max-width: 380px) {
+  .account-card {
+    padding: 25px 18px;
+  }
+
+  .account-card h1 {
+    font-size: 24px;
+  }
+
+  .account-icon {
+    width: 70px;
+    height: 70px;
+    font-size: 32px;
+  }
+}

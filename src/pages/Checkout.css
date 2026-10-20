@@ -1,0 +1,146 @@
+.checkout-page {
+  padding: 60px 8%;
+  min-height: 80vh;
+}
+
+.checkout-page > h1 {
+  font-size: 36px;
+  margin-bottom: 40px;
+}
+
+.checkout-container {
+  display: grid;
+  grid-template-columns: 1fr 380px;
+  gap: 40px;
+  align-items: start;
+}
+
+.checkout-form,
+.checkout-summary {
+  border: 1px solid #eee;
+  border-radius: 16px;
+  padding: 30px;
+}
+
+.checkout-form h2,
+.checkout-summary h2 {
+  margin-bottom: 25px;
+}
+
+.checkout-form form {
+  display: flex;
+  flex-direction: column;
+}
+
+.checkout-form label {
+  font-weight: 600;
+  margin-bottom: 8px;
+  margin-top: 15px;
+}
+
+.checkout-form input,
+.checkout-form textarea {
+  width: 100%;
+  padding: 13px;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  font-size: 15px;
+  font-family: inherit;
+  outline: none;
+}
+
+.checkout-form input:focus,
+.checkout-form textarea:focus {
+  border-color: #ff6b35;
+}
+
+.form-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px;
+}
+
+.form-row > div {
+  display: flex;
+  flex-direction: column;
+}
+
+.place-order-btn {
+  margin-top: 30px;
+  padding: 15px;
+  border: none;
+  border-radius: 25px;
+  background: #ff6b35;
+  color: white;
+  font-size: 16px;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.place-order-btn:hover {
+  background: #e95725;
+}
+
+.checkout-item {
+  display: flex;
+  justify-content: space-between;
+  gap: 15px;
+  margin-bottom: 18px;
+  font-size: 14px;
+}
+
+.checkout-summary hr {
+  border: none;
+  border-top: 1px solid #eee;
+  margin: 20px 0;
+}
+
+/* =========================
+   MOBILE CHECKOUT
+========================= */
+
+@media (max-width: 650px) {
+
+  .checkout-page {
+    padding: 40px 6%;
+  }
+
+  .checkout-page > h1 {
+    font-size: 30px;
+    margin-bottom: 25px;
+  }
+
+  .checkout-container {
+    grid-template-columns: 1fr;
+    gap: 25px;
+  }
+
+  .checkout-form,
+  .checkout-summary {
+    padding: 20px;
+  }
+
+  .checkout-form h2,
+  .checkout-summary h2 {
+    font-size: 21px;
+  }
+
+  .form-row {
+    grid-template-columns: 1fr;
+    gap: 0;
+  }
+
+  .checkout-form input,
+  .checkout-form textarea {
+    font-size: 14px;
+  }
+
+  .place-order-btn {
+    width: 100%;
+  }
+
+  .checkout-item {
+    font-size: 13px;
+  }
+
+}

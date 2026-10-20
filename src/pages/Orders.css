@@ -1,0 +1,147 @@
+.orders-page {
+  padding: 60px 8%;
+  min-height: 80vh;
+}
+
+.orders-page > h1 {
+  font-size: 36px;
+  margin-bottom: 40px;
+}
+
+.orders-list {
+  display: flex;
+  flex-direction: column;
+  gap: 25px;
+  max-width: 900px;
+}
+
+.order-card {
+  border: 1px solid #eee;
+  border-radius: 16px;
+  padding: 25px;
+}
+
+.order-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  padding-bottom: 20px;
+  border-bottom: 1px solid #eee;
+}
+
+.order-header h2 {
+  font-size: 18px;
+  margin-bottom: 6px;
+}
+
+.order-header p {
+  color: #777;
+  font-size: 14px;
+}
+
+.order-status {
+  background: #fff5ef;
+  color: #ff6b35;
+  padding: 8px 14px;
+  border-radius: 20px;
+  font-size: 13px;
+  font-weight: bold;
+}
+
+.order-items {
+  padding: 20px 0;
+}
+
+.order-item {
+  display: flex;
+  justify-content: space-between;
+  padding: 10px 0;
+  color: #555;
+}
+
+.order-footer {
+  display: flex;
+  justify-content: space-between;
+  border-top: 1px solid #eee;
+  padding-top: 20px;
+  font-size: 18px;
+}
+
+.order-footer strong {
+  color: #ff6b35;
+}
+
+.empty-orders {
+  min-height: 70vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+}
+
+.empty-orders-icon {
+  font-size: 80px;
+  margin-bottom: 20px;
+}
+
+.empty-orders h1 {
+  margin-bottom: 10px;
+}
+
+.empty-orders p {
+  color: #777;
+  margin-bottom: 25px;
+}
+
+.empty-orders a {
+  text-decoration: none;
+  background: #ff6b35;
+  color: white;
+  padding: 12px 25px;
+  border-radius: 25px;
+  font-weight: bold;
+}
+
+/* =========================
+   MOBILE ORDERS
+========================= */
+
+@media (max-width: 650px) {
+
+  .orders-page {
+    padding: 40px 6%;
+  }
+
+  .orders-page > h1 {
+    font-size: 30px;
+    margin-bottom: 25px;
+  }
+
+  .order-card {
+    padding: 18px;
+  }
+
+  .order-header {
+    flex-direction: column;
+    gap: 15px;
+  }
+
+  .order-header h2 {
+    font-size: 16px;
+  }
+
+  .order-status {
+    align-self: flex-start;
+  }
+
+  .order-item {
+    font-size: 13px;
+    gap: 10px;
+  }
+
+  .order-footer {
+    font-size: 16px;
+  }
+
+}

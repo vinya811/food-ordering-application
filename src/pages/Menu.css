@@ -1,0 +1,260 @@
+/* =========================
+   MENU PAGE
+========================= */
+
+.menu-page {
+  min-height: 100vh;
+  padding-bottom: 80px;
+}
+
+
+/* =========================
+   MENU HEADER
+========================= */
+
+.menu-header {
+  text-align: center;
+  padding: 70px 20px 40px;
+  background: #fff5ef;
+}
+
+.menu-small {
+  color: #ff6b35;
+  font-size: 13px;
+  font-weight: bold;
+  letter-spacing: 2px;
+  margin-bottom: 12px;
+}
+
+.menu-header h1 {
+  font-size: 45px;
+  margin-bottom: 12px;
+}
+
+.menu-header p:last-child {
+  color: #777;
+  font-size: 17px;
+}
+
+
+/* =========================
+   SEARCH
+========================= */
+
+.menu-search {
+  max-width: 700px;
+  margin: 35px auto 25px;
+  padding: 14px 20px;
+
+  display: flex;
+  align-items: center;
+  gap: 12px;
+
+  border: 1px solid #ddd;
+  border-radius: 30px;
+  background: white;
+
+  box-shadow: 0 5px 20px rgba(0, 0, 0, 0.06);
+}
+
+.menu-search span {
+  font-size: 20px;
+}
+
+.menu-search input {
+  flex: 1;
+  border: none;
+  outline: none;
+  font-size: 16px;
+  font-family: inherit;
+}
+
+.menu-search input::placeholder {
+  color: #999;
+}
+
+.menu-search button {
+  border: none;
+  background: transparent;
+  color: #777;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+.menu-search button:hover {
+  color: #ff6b35;
+}
+
+
+/* =========================
+   CATEGORIES
+========================= */
+
+.menu-categories {
+  max-width: 1100px;
+  margin: 0 auto 40px;
+  padding: 0 20px;
+
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+
+.menu-category {
+  border: 1px solid #ddd;
+  background: white;
+  color: #333;
+
+  padding: 10px 18px;
+  border-radius: 25px;
+
+  font-size: 14px;
+  font-weight: 600;
+
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.menu-category span {
+  margin-right: 6px;
+}
+
+.menu-category:hover {
+  border-color: #ff6b35;
+  color: #ff6b35;
+}
+
+.menu-category.active {
+  background: #ff6b35;
+  border-color: #ff6b35;
+  color: white;
+}
+
+
+/* =========================
+   FOOD SECTION
+========================= */
+
+.menu-food {
+  padding: 0 8%;
+}
+
+.menu-title {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 25px;
+}
+
+.menu-title h2 {
+  font-size: 30px;
+}
+
+.menu-title span {
+  color: #777;
+  font-size: 14px;
+}
+
+
+/* =========================
+   FOOD GRID
+========================= */
+
+.menu-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 25px;
+}
+
+
+/* =========================
+   NO RESULTS
+========================= */
+
+.menu-no-results {
+  padding: 70px 20px;
+  text-align: center;
+  border: 1px solid #eee;
+  border-radius: 15px;
+}
+
+.menu-no-results div {
+  font-size: 55px;
+  margin-bottom: 15px;
+}
+
+.menu-no-results h3 {
+  font-size: 22px;
+  margin-bottom: 8px;
+}
+
+.menu-no-results p {
+  color: #777;
+}
+
+
+/* =========================
+   TABLET
+========================= */
+
+@media (max-width: 1000px) {
+
+  .menu-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+}
+
+
+/* =========================
+   MOBILE
+========================= */
+
+@media (max-width: 650px) {
+
+  .menu-header {
+    padding: 50px 20px 30px;
+  }
+
+  .menu-header h1 {
+    font-size: 36px;
+  }
+
+  .menu-header p:last-child {
+    font-size: 15px;
+  }
+
+  .menu-search {
+    margin: 25px 6% 20px;
+    padding: 12px 16px;
+  }
+
+  .menu-search input {
+    font-size: 14px;
+  }
+
+  .menu-categories {
+    justify-content: flex-start;
+    padding: 0 6%;
+    overflow-x: auto;
+    flex-wrap: nowrap;
+  }
+
+  .menu-category {
+    flex-shrink: 0;
+  }
+
+  .menu-food {
+    padding: 0 6%;
+  }
+
+  .menu-title h2 {
+    font-size: 25px;
+  }
+
+  .menu-grid {
+    grid-template-columns: 1fr;
+  }
+
+}
