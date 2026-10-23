@@ -1,4 +1,3 @@
-
 import { useState } from "react";
 import {
   Link,
@@ -12,6 +11,7 @@ import "./Login.css";
 function Login() {
   const navigate = useNavigate();
   const location = useLocation();
+
   const { login } = useAuth();
 
   const [formData, setFormData] = useState({
@@ -20,6 +20,12 @@ function Login() {
   });
 
   const [error, setError] = useState("");
+  const [loading, setLoading] = useState(false);
+
+
+  // =========================
+  // HANDLE INPUT
+  // =========================
 
   const handleChange = (event) => {
     const { name, value } = event.target;
@@ -32,92 +38,108 @@ function Login() {
     setError("");
   };
 
-  const handleSubmit = (event) => {
+
+  // =========================
+  // LOGIN
+  // =========================
+
+  const handleSubmit = async (event) => {
     event.preventDefault();
 
     const email = formData.email.trim().toLowerCase();
+    const password = formData.password;
 
-    let accounts = [];
+    if (!email || !password) {
+      setError("Please enter email and password.");
+      return;
+    }
+
+    setLoading(true);
+    setError("");
 
     try {
-      // Read all registered accounts.
-      accounts = JSON.parse(
-        localStorage.getItem("foodieAccounts") || "[]"
+      const response = await fetch(
+        "http://localhost:5000/api/auth/login",
+        {
+          method: "POST",
+
+          headers: {
+            "Content-Type": "application/json"
+          },
+
+          body: JSON.stringify({
+            email,
+            password
+          })
+        }
       );
 
-      if (!Array.isArray(accounts)) {
-        accounts = [];
-      }
+      const data = await response.json();
 
-      // Support accounts saved using the older single-account format.
-      const oldAccount = localStorage.getItem("foodieAccount");
-
-      if (oldAccount) {
-        const parsedOldAccount = JSON.parse(oldAccount);
-
-        const alreadySaved = accounts.some(
-          (account) =>
-            account.email?.trim().toLowerCase() ===
-            parsedOldAccount.email?.trim().toLowerCase()
+      if (!response.ok) {
+        setError(
+          data.message || "Incorrect email or password."
         );
 
-        if (parsedOldAccount.email && !alreadySaved) {
-          accounts.push(parsedOldAccount);
-        }
+        return;
       }
-    } catch {
-      setError("Could not read saved accounts. Please try again.");
-      return;
+
+
+      // Save the MongoDB user
+      // as the currently logged-in user.
+      login(data.user);
+
+
+      // Go back to the page the user
+      // originally wanted to visit.
+      const destination = location.state?.from;
+
+      const requestedPath =
+        destination?.pathname?.startsWith("/") &&
+        !destination.pathname.startsWith("//")
+          ? destination.pathname
+          : "/";
+
+      navigate(requestedPath, {
+        replace: true
+      });
+
+    } catch (error) {
+      console.error("Login error:", error);
+
+      setError(
+        "Could not connect to the server. Please make sure the backend is running."
+      );
+
+    } finally {
+      setLoading(false);
     }
-
-    // Find the account matching both email and password.
-    const account = accounts.find(
-      (savedAccount) =>
-        savedAccount.email?.trim().toLowerCase() === email &&
-        savedAccount.password === formData.password
-    );
-
-    if (!account) {
-      setError("Incorrect email or password.");
-      return;
-    }
-
-    // Save the updated account list if an older account was migrated.
-    localStorage.setItem(
-      "foodieAccounts",
-      JSON.stringify(accounts)
-    );
-
-    // Update the active login session.
-    login({
-      name: account.name,
-      email: account.email
-    });
-
-    // Return to the requested protected page, or Home by default.
-    const destination = location.state?.from;
-    const requestedPath =
-      destination?.pathname?.startsWith("/") &&
-      !destination.pathname.startsWith("//")
-        ? destination.pathname
-        : "/";
-
-    navigate(requestedPath, { replace: true });
   };
+
 
   return (
     <div className="login-page">
-      <div className="login-card">
-        <div className="login-icon">🍔</div>
 
-        <h1>Welcome Back!</h1>
+      <div className="login-card">
+
+        <div className="login-icon">
+          🍔
+        </div>
+
+        <h1>
+          Welcome Back!
+        </h1>
 
         <p className="login-subtitle">
           Login to continue ordering delicious food.
         </p>
 
+
         <form onSubmit={handleSubmit}>
-          <label>Email</label>
+
+          <label>
+            Email
+          </label>
 
           <input
             type="email"
@@ -128,7 +150,10 @@ function Login() {
             required
           />
 
-          <label>Password</label>
+
+          <label>
+            Password
+          </label>
 
           <input
             type="password"
@@ -139,20 +164,41 @@ function Login() {
             required
           />
 
+
           {error && (
-            <p className="login-error" role="alert">
+            <p
+              className="login-error"
+              role="alert"
+            >
               {error}
             </p>
           )}
 
-          <button type="submit">Login</button>
+
+          <button
+            type="submit"
+            disabled={loading}
+          >
+            {loading
+              ? "Logging in..."
+              : "Login"}
+          </button>
+
         </form>
 
+
         <p className="signup-text">
+
           Don't have an account?{" "}
-          <Link to="/signup">Sign Up</Link>
+
+          <Link to="/signup">
+            Sign Up
+          </Link>
+
         </p>
+
       </div>
+
     </div>
   );
 }

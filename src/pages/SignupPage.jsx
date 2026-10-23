@@ -1,4 +1,3 @@
-```jsx
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { useAuth } from "../context/AuthContext";
@@ -36,7 +35,21 @@ function Signup() {
     const email = formData.email.trim().toLowerCase();
     const password = formData.password;
 
-    // Check passwords
+    if (!name) {
+      setError("Please enter your name.");
+      return;
+    }
+
+    if (!email) {
+      setError("Please enter your email.");
+      return;
+    }
+
+    if (password.length < 6) {
+      setError("Password must be at least 6 characters.");
+      return;
+    }
+
     if (password !== formData.confirmPassword) {
       setError("Passwords do not match.");
       return;
@@ -50,11 +63,9 @@ function Signup() {
         "http://localhost:5000/api/auth/signup",
         {
           method: "POST",
-
           headers: {
             "Content-Type": "application/json"
           },
-
           body: JSON.stringify({
             name,
             email,
@@ -66,12 +77,12 @@ function Signup() {
       const data = await response.json();
 
       if (!response.ok) {
-        setError(data.message || "Could not create account.");
-        setLoading(false);
+        setError(
+          data.message || "Could not create account."
+        );
         return;
       }
 
-      // Automatically log the user in
       login(data.user);
 
       navigate("/");
@@ -102,9 +113,12 @@ function Signup() {
 
         <form onSubmit={handleSubmit}>
 
-          <label>Full Name</label>
+          <label htmlFor="name">
+            Full Name
+          </label>
 
           <input
+            id="name"
             type="text"
             name="name"
             value={formData.name}
@@ -113,9 +127,12 @@ function Signup() {
             required
           />
 
-          <label>Email</label>
+          <label htmlFor="email">
+            Email
+          </label>
 
           <input
+            id="email"
             type="email"
             name="email"
             value={formData.email}
@@ -124,9 +141,12 @@ function Signup() {
             required
           />
 
-          <label>Password</label>
+          <label htmlFor="password">
+            Password
+          </label>
 
           <input
+            id="password"
             type="password"
             name="password"
             value={formData.password}
@@ -136,9 +156,12 @@ function Signup() {
             required
           />
 
-          <label>Confirm Password</label>
+          <label htmlFor="confirmPassword">
+            Confirm Password
+          </label>
 
           <input
+            id="confirmPassword"
             type="password"
             name="confirmPassword"
             value={formData.confirmPassword}
@@ -181,4 +204,3 @@ function Signup() {
 }
 
 export default Signup;
-```

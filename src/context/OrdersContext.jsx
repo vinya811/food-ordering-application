@@ -1,4 +1,3 @@
-
 import {
   createContext,
   useContext,
@@ -10,83 +9,143 @@ import { useAuth } from "./AuthContext";
 
 const OrdersContext = createContext();
 
-const STORAGE_KEY = "foodieOrdersByUser";
-
 function getUserEmail(user) {
   return user?.email?.trim().toLowerCase() || "";
 }
 
-function getSavedOrders(email) {
-  if (!email) return [];
-
-  try {
-    const allOrders = JSON.parse(
-      localStorage.getItem(STORAGE_KEY) || "{}"
-    );
-
-    return allOrders[email] || [];
-  } catch {
-    return [];
-  }
-}
-
 export function OrdersProvider({ children }) {
   const { user } = useAuth();
+
   const email = getUserEmail(user);
 
-  const [orders, setOrders] = useState(() =>
-    getSavedOrders(email)
-  );
+  const [orders, setOrders] = useState([]);
+  const [loading, setLoading] = useState(false);
 
-  // Load the correct orders whenever the logged-in account changes.
+  // =========================
+  // LOAD ORDERS FROM MONGODB
+  // =========================
+
   useEffect(() => {
-    setOrders(getSavedOrders(email));
-  }, [email]);
-
-  const placeOrder = (cart, deliveryDetails, total) => {
     if (!email) {
-      throw new Error("Please log in before placing an order.");
+      setOrders([]);
+      return;
     }
 
-    const newOrder = {
-      id: `ORD-${Date.now()}`,
-      items: cart,
-      deliveryDetails,
-      total,
-      status: "Order Placed",
-      date: new Date().toLocaleDateString()
+    const loadOrders = async () => {
+      setLoading(true);
+
+      try {
+        const response = await fetch(
+          "http://localhost:5000/api/orders/" +
+            encodeURIComponent(email)
+        );
+
+        const data = await response.json();
+
+        if (!response.ok) {
+          console.error(
+            "Could not load orders:",
+            data.message
+          );
+
+          setOrders([]);
+          return;
+        }
+
+        setOrders(data);
+
+      } catch (error) {
+        console.error(
+          "Could not connect to orders server:",
+          error
+        );
+
+        setOrders([]);
+
+      } finally {
+        setLoading(false);
+      }
     };
 
-    // Save the order under this user's email only.
-    const allOrders = JSON.parse(
-      localStorage.getItem(STORAGE_KEY) || "{}"
-    );
+    loadOrders();
+  }, [email]);
 
-    const userOrders = allOrders[email] || [];
 
-    allOrders[email] = [newOrder, ...userOrders];
+  // =========================
+  // PLACE ORDER
+  // =========================
 
-    localStorage.setItem(
-      STORAGE_KEY,
-      JSON.stringify(allOrders)
-    );
+  const placeOrder = async (
+    cart,
+    deliveryDetails,
+    total
+  ) => {
+    if (!email) {
+      throw new Error(
+        "Please log in before placing an order."
+      );
+    }
 
-    setOrders(allOrders[email]);
+    try {
+      const response = await fetch(
+        "http://localhost:5000/api/orders",
+        {
+          method: "POST",
 
-    return newOrder;
+          headers: {
+            "Content-Type": "application/json"
+          },
+
+          body: JSON.stringify({
+            userEmail: email,
+            items: cart,
+            deliveryDetails,
+            total
+          })
+        }
+      );
+
+      const data = await response.json();
+
+      if (!response.ok) {
+        throw new Error(
+          data.message || "Could not place order."
+        );
+      }
+
+      // Add the newly created order to the
+      // current user's orders immediately.
+      setOrders((currentOrders) => [
+        data.order,
+        ...currentOrders
+      ]);
+
+      return data.order;
+
+    } catch (error) {
+      console.error(
+        "Place order error:",
+        error
+      );
+
+      throw error;
+    }
   };
+
 
   return (
     <OrdersContext.Provider
       value={{
         orders,
-        placeOrder
+        placeOrder,
+        loading
       }}
     >
       {children}
     </OrdersContext.Provider>
   );
 }
+
 
 export function useOrders() {
   return useContext(OrdersContext);

@@ -17,7 +17,7 @@ import Checkout from "./pages/Checkout";
 import Orders from "./pages/Orders";
 import OrderSuccess from "./pages/OrderSuccess";
 import Login from "./pages/Login";
-import Signup from "./pages/Signup";
+import Signup from "./pages/SignupPage";
 import Account from "./pages/Account";
 
 import { CartProvider } from "./context/CartContext";
@@ -45,12 +45,26 @@ function App() {
             <Navbar />
 
             <Routes>
-              {/* Public pages */}
-              <Route path="/" element={<Home />} />
-              <Route path="/menu" element={<Menu />} />
-              <Route path="/cart" element={<Cart />} />
 
-              {/* Protected pages */}
+              {/* Public pages */}
+
+              <Route
+                path="/"
+                element={<Home />}
+              />
+
+              <Route
+                path="/menu"
+                element={<Menu />}
+              />
+
+              <Route
+                path="/cart"
+                element={<Cart />}
+              />
+
+              {/* Checkout - Protected */}
+
               <Route
                 path="/checkout"
                 element={
@@ -60,14 +74,14 @@ function App() {
                 }
               />
 
+              {/* Orders - Login screen handled inside Orders.jsx */}
+
               <Route
                 path="/orders"
-                element={
-                  <ProtectedRoute>
-                    <Orders />
-                  </ProtectedRoute>
-                }
+                element={<Orders />}
               />
+
+              {/* Account - Protected */}
 
               <Route
                 path="/account"
@@ -79,12 +93,14 @@ function App() {
               />
 
               {/* Order success */}
+
               <Route
                 path="/order-success/:id"
                 element={<OrderSuccess />}
               />
 
               {/* Authentication */}
+
               <Route
                 path="/login"
                 element={<Login />}
@@ -94,6 +110,7 @@ function App() {
                 path="/signup"
                 element={<Signup />}
               />
+
             </Routes>
 
           </OrdersProvider>

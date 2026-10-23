@@ -37,7 +37,7 @@ function Checkout() {
     });
   };
 
-  const handleSubmit = (event) => {
+  const handleSubmit = async (event) => {
     event.preventDefault();
 
     if (cart.length === 0) {
@@ -45,7 +45,7 @@ function Checkout() {
       return;
     }
 
-    const order = placeOrder(
+    const order = await placeOrder(
       cart,
       formData,
       total

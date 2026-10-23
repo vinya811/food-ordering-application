@@ -20,6 +20,7 @@ function Account() {
   });
 
   const [message, setMessage] = useState("");
+  const [saving, setSaving] = useState(false);
 
   const handleChange = (event) => {
     const { name, value } = event.target;
@@ -32,7 +33,7 @@ function Account() {
     setMessage("");
   };
 
-  const handleSave = (event) => {
+  const handleSave = async (event) => {
     event.preventDefault();
 
     const name = formData.name.trim();
@@ -43,18 +44,59 @@ function Account() {
       return;
     }
 
-    updateUser({
-      name,
-      email
-    });
+    setSaving(true);
+    setMessage("");
 
-    setFormData({
-      name,
-      email
-    });
+    try {
+      const response = await fetch(
+        "http://localhost:5000/api/auth/profile",
+        {
+          method: "PUT",
+          headers: {
+            "Content-Type": "application/json"
+          },
+          body: JSON.stringify({
+            email: user.email,
+            name,
+            newEmail: email
+          })
+        }
+      );
 
-    setIsEditing(false);
-    setMessage("Profile updated successfully! ✅");
+      const data = await response.json();
+
+      if (!response.ok) {
+        setMessage(
+          data.message || "Could not update profile."
+        );
+        return;
+      }
+
+      // Update the logged-in user
+      // with the data returned by MongoDB.
+      updateUser(data.user);
+
+      setFormData({
+        name: data.user.name,
+        email: data.user.email
+      });
+
+      setIsEditing(false);
+
+      setMessage(
+        "Profile updated successfully! ✅"
+      );
+
+    } catch (error) {
+      console.error("Profile update error:", error);
+
+      setMessage(
+        "Could not connect to the server. Please make sure the backend is running."
+      );
+
+    } finally {
+      setSaving(false);
+    }
   };
 
   const handleLogout = () => {
@@ -100,11 +142,15 @@ function Account() {
             />
 
             <div className="edit-buttons">
+
               <button
                 type="submit"
                 className="save-profile-btn"
+                disabled={saving}
               >
-                💾 Save Changes
+                {saving
+                  ? "Saving..."
+                  : "💾 Save Changes"}
               </button>
 
               <button
@@ -123,6 +169,7 @@ function Account() {
               >
                 Cancel
               </button>
+
             </div>
           </form>
         ) : (
@@ -131,6 +178,7 @@ function Account() {
 
               <div className="account-item">
                 <span>Full Name</span>
+
                 <strong>
                   {user?.name || "User"}
                 </strong>
@@ -138,6 +186,7 @@ function Account() {
 
               <div className="account-item">
                 <span>Email</span>
+
                 <strong>
                   {user?.email || "No email"}
                 </strong>
@@ -145,6 +194,7 @@ function Account() {
 
               <div className="account-item">
                 <span>Total Orders</span>
+
                 <strong>
                   {orders.length}
                 </strong>
