@@ -49,7 +49,7 @@ function Account() {
 
     try {
       const response = await fetch(
-        "http://localhost:5000/api/auth/profile",
+        "https://food-ordering-application-nine.vercel.app/api/auth/profile",
         {
           method: "PUT",
           headers: {

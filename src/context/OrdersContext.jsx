@@ -36,7 +36,7 @@ export function OrdersProvider({ children }) {
 
       try {
         const response = await fetch(
-          "http://localhost:5000/api/orders/" +
+          "https://food-ordering-application-nine.vercel.app/api/orders/" +
             encodeURIComponent(email)
         );
 
@@ -88,7 +88,7 @@ export function OrdersProvider({ children }) {
 
     try {
       const response = await fetch(
-        "http://localhost:5000/api/orders",
+        "https://food-ordering-application-nine.vercel.app/api/orders",
         {
           method: "POST",
 

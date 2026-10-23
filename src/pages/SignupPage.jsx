@@ -60,7 +60,7 @@ function Signup() {
 
     try {
       const response = await fetch(
-        "http://localhost:5000/api/auth/signup",
+        "https://food-ordering-application-nine.vercel.app/api/auth/signup",
         {
           method: "POST",
           headers: {
